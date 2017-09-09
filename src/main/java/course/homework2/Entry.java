@@ -6,7 +6,13 @@ public class Entry {
     public static void run() {
         Helpers.log("Welcome to mysterious time world.");
 
-        CustomAry hh = new CustomAry(24, 0, 0);
-        CustomAry mm = new CustomAry(60, 0, 0, hh);
+        Time t = new Time(23, 59);
+        t.printTime();
+
+        t.setMinute(69);
+        t.printTime();
+
+        t.setMinute(-70);
+        t.printTime();
     }
 }
