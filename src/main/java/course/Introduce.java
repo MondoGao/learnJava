@@ -1,7 +1,5 @@
 package course;
 
-import course.homework1.Bank;
-
 public class Introduce {
     public String getGreeting() {
         return "来自信管 1501 江高华的问候！";
@@ -11,6 +9,9 @@ public class Introduce {
         Helpers.log(new Introduce().getGreeting());
 
         // Homework1
-        Bank.run();
+        course.homework1.Entry.run();
+
+        // Homework2
+        course.homework2.Entry.run();
     }
 }

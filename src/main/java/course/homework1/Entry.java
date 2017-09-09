@@ -1,6 +1,6 @@
 package course.homework1;
 
-public class Bank {
+public class Entry {
     public static void run() {
         System.out.println("Welcome to FakeUnionPay checkout system.");
 
