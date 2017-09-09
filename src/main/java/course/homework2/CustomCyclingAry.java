@@ -4,14 +4,25 @@ class CustomCyclingAry extends CustomAry {
     private int[] cyclingArr;
     private int cyclingIndex = 0;
 
-    public CustomCyclingAry(int minNum, int value, CustomAry parentAry, int[] cyclingArr) {
+    public CustomCyclingAry(int minNum, int value, CustomAry parentAry, int[] cyclingArr, int cyclingIndex) {
         super(cyclingArr[0], minNum, value, parentAry);
         this.cyclingArr = cyclingArr;
+        this.cyclingIndex = cyclingIndex;
+
+        this.refreshMaxNum(0);
     }
 
-    public CustomCyclingAry(int minNum, int value, int[] cyclingArr) {
+    public CustomCyclingAry(int minNum, int value, int[] cyclingArr, int cyclingIndex) {
         super(cyclingArr[0], minNum, value);
         this.cyclingArr = cyclingArr;
+        this.cyclingIndex = cyclingIndex;
+
+        this.refreshMaxNum(0);
+
+    }
+
+    public void setCyclingIndex(int cyclingIndex) {
+        this.cyclingIndex = cyclingIndex;
     }
 
     private void refreshMaxNum(int direction) {
@@ -43,7 +54,11 @@ class CustomCyclingAry extends CustomAry {
         } else if (value < minNum) {
             refreshMaxNum(-1);
 
-            value += maxNum;
+            if (parentAry != null) {
+                parentAry.substract(1);
+            }
+
+            value += maxNum - minNum;
 
             refreshValue();
         }

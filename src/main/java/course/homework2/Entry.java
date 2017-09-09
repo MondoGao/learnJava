@@ -14,5 +14,25 @@ public class Entry {
 
         t.setMinute(-70);
         t.printTime();
+
+        Helpers.log("\n");
+
+        Date d = new Date(2019, 2, 9);
+        d.printDate();
+
+        d.setDay(28);
+        d.printDate();
+
+        d.setDay(29);
+        d.printDate();
+
+        d.setDay(-1);
+        d.printDate();
+
+        d.setDay(0);
+        d.printDate();
+
+        d.setDay(0);
+        d.printDate();
     }
 }

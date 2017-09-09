@@ -11,6 +11,8 @@ public class Introduce {
         // Homework1
         course.homework1.Entry.run();
 
+        Helpers.log("\n");
+
         // Homework2
         course.homework2.Entry.run();
     }
