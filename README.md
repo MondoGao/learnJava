@@ -7,6 +7,10 @@ Java 学习仓库
 ```bash
 gradle run
 ```
+## Note
+
+主程序目录在 src/main/java/course 下
+入口类为 Introduce
 
 ## Contributor
 
