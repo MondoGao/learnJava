@@ -7,5 +7,8 @@ public class Introduce {
 
     public static void main(String[] args) {
         System.out.println(new Introduce().getGreeting());
+
+        // Homework1
+        Homework_Bank.run();
     }
 }
