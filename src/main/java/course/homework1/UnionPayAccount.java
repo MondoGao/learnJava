@@ -1,37 +1,6 @@
-package course;
+package course.homework1;
 
-public class Homework_Bank {
-    public static void run() {
-        System.out.println("Welcome to FakeUnionPay checkout system.");
-
-        UnionPayAccount acc1 = new BOCAccount(100, "BOC");
-        UnionPayAccount acc2 = new ICBCAccount(1000, "ICBC");
-
-        acc1.deposit(28.8);
-        acc1.printBalance();
-
-        acc1.withdraw(130);
-
-        acc1.printBalance();
-        acc2.printBalance();
-
-        acc1.transferTo(128.8, acc2);
-
-        acc1.printBalance();
-        acc2.printBalance();
-    }
-}
-
-interface UnionPayProtocol {
-    boolean isBalanceEnough(double money);
-    
-    boolean deposit(double money);
-    boolean withdraw(double money);
-
-    boolean transferTo(double money, UnionPayProtocol targetAccount);
-
-    void printBalance();
-}
+import course.Helpers;
 
 abstract class UnionPayAccount implements UnionPayProtocol {
     private double balance = 0;
@@ -84,21 +53,5 @@ abstract class UnionPayAccount implements UnionPayProtocol {
 
     public void printBalance() {
         Helpers.log(name + "'s balance: " + String.valueOf(balance));
-    }
-}
-
-class BOCAccount extends UnionPayAccount {
-    public static String bankName = "BOC";
-
-    public BOCAccount(double initBalance, String name) {
-        super(initBalance, name);
-    }
-}
-
-class ICBCAccount extends UnionPayAccount {
-    public static String bankName = "ICBC";
-
-    public ICBCAccount(double initBalance, String name) {
-        super(initBalance, name);
     }
 }
