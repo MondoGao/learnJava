@@ -9,11 +9,14 @@ public class Introduce {
         Helpers.log(new Introduce().getGreeting());
 
         // Homework1
-        course.homework1.Entry.run();
+        // course.homework1.Entry.run();
 
-        Helpers.log("\n");
+        // Helpers.log("\n");
 
         // Homework2
-        course.homework2.Entry.run();
+        // course.homework2.Entry.run();
+
+        // Homework3
+        course.homework3.Poker.run();
     }
 }
