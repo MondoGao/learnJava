@@ -20,6 +20,9 @@ public class Introduce {
         // course.homework3.Poker.run();
 
         // Homework4
-        course.homework4.MedalTally.run();
+        // course.homework4.MedalTally.run();
+
+        // Homework5
+        course.homework5.Task.run();
     }
 }
