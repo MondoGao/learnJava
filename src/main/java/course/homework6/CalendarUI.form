@@ -225,9 +225,10 @@
                       </grid>
                     </constraints>
                     <properties>
-                      <background color="-16728876"/>
+                      <background color="-1"/>
                       <doubleBuffered value="true"/>
                       <focusable value="false"/>
+                      <foreground color="-16777216"/>
                       <horizontalAlignment value="0"/>
                       <horizontalTextPosition value="0"/>
                       <opaque value="false"/>
@@ -242,7 +243,9 @@
                       </grid>
                     </constraints>
                     <properties>
+                      <background color="-1"/>
                       <doubleBuffered value="true"/>
+                      <foreground color="-16777216"/>
                       <horizontalAlignment value="0"/>
                       <horizontalTextPosition value="0"/>
                       <text value="2"/>
@@ -256,7 +259,9 @@
                     </constraints>
                     <properties>
                       <alignmentX value="0.5"/>
+                      <background color="-1"/>
                       <doubleBuffered value="true"/>
+                      <foreground color="-16777216"/>
                       <horizontalAlignment value="0"/>
                       <horizontalTextPosition value="0"/>
                       <text value="3"/>
@@ -270,7 +275,9 @@
                     </constraints>
                     <properties>
                       <alignmentX value="0.5"/>
+                      <background color="-1"/>
                       <doubleBuffered value="true"/>
+                      <foreground color="-16777216"/>
                       <horizontalAlignment value="0"/>
                       <horizontalTextPosition value="0"/>
                       <text value="4"/>
@@ -284,7 +291,9 @@
                     </constraints>
                     <properties>
                       <alignmentX value="0.5"/>
+                      <background color="-1"/>
                       <doubleBuffered value="true"/>
+                      <foreground color="-16777216"/>
                       <horizontalAlignment value="0"/>
                       <horizontalTextPosition value="0"/>
                       <text value="5"/>
@@ -298,7 +307,9 @@
                     </constraints>
                     <properties>
                       <alignmentX value="0.5"/>
+                      <background color="-1"/>
                       <doubleBuffered value="true"/>
+                      <foreground color="-16777216"/>
                       <horizontalAlignment value="0"/>
                       <horizontalTextPosition value="0"/>
                       <text value="6"/>
@@ -312,7 +323,9 @@
                     </constraints>
                     <properties>
                       <alignmentX value="0.5"/>
+                      <background color="-1"/>
                       <doubleBuffered value="true"/>
+                      <foreground color="-16777216"/>
                       <horizontalAlignment value="0"/>
                       <horizontalTextPosition value="0"/>
                       <text value="7"/>

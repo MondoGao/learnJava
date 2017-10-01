@@ -110,48 +110,43 @@ public class CalendarUI extends JFrame {
         LocalDate firstOfMonth = LocalDate.of(year, month, 1);
         DayOfWeek firstDayOfWeek = firstOfMonth.getDayOfWeek();
 
-        int pindex = 0;
+        int pIndex = 0;
         int dd = 1;
+        final Color transparent = new Color(255, 255, 255, 0);
+        final Color grey = new Color(240, 240, 240);
         for (Component p : jpDate.getComponents()) {
             JPanel pa = (JPanel) p;
 
             int lbIndex = 0;
             for (Component l : pa.getComponents()) {
                 JLabel lb = (JLabel) l;
+                lb.setForeground(transparent);
 
-                if (pindex == 0) {
-                    if (lbIndex + 1 < firstDayOfWeek.getValue()) {
-                        lb.setForeground(new Color(255, 255, 255, 0));
-                        lb.setOpaque(false);
-                    } else {
+                if (pIndex == 0) {
+                    if (lbIndex + 1 >= firstDayOfWeek.getValue()) {
                         lb.setText(String.valueOf(dd++));
                         lb.setForeground(Color.BLACK);
-                        if (dd - 1 == day) {
-                            lb.setForeground(Color.WHITE);
-                            lb.setOpaque(true);
-                            lb.setBackground(new Color(0, 151, 167));
-                        }
                     }
                 } else if (dd <= month.length(false)) {
                     lb.setText(String.valueOf(dd++));
                     lb.setForeground(Color.BLACK);
-                    if (dd == day) {
-                        lb.setForeground(Color.WHITE);
-                        lb.setOpaque(true);
-                        lb.setBackground(new Color(0, 151, 167));
-                    }
-                } else {
-                    lb.setForeground(new Color(255, 255, 255, 0));
-                    lb.setOpaque(false);
                 }
 
+                if (dd - 1 == day) {
+                    lb.setOpaque(true);
+                    lb.setBackground(grey);
+                } else {
+                    lb.setOpaque(false);
+                    lb.setBackground(Color.WHITE);
+                }
 
                 lbIndex++;
             }
 
-            pindex++;
+            pIndex++;
         }
 
+        repaint();
     }
 
     private String capitalize(String str) {
@@ -320,9 +315,10 @@ public class CalendarUI extends JFrame {
         DateLine.setPreferredSize(new Dimension(294, 36));
         jpDate.add(DateLine);
         final JLabel label8 = new JLabel();
-        label8.setBackground(new Color(-16728876));
+        label8.setBackground(new Color(-1));
         label8.setDoubleBuffered(true);
         label8.setFocusable(false);
+        label8.setForeground(new Color(-16777216));
         label8.setHorizontalAlignment(0);
         label8.setHorizontalTextPosition(0);
         label8.setOpaque(false);
@@ -330,42 +326,54 @@ public class CalendarUI extends JFrame {
         label8.setVisible(true);
         DateLine.add(label8, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_NORTH, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension(34, 34), null, 0, false));
         final JLabel label9 = new JLabel();
+        label9.setBackground(new Color(-1));
         label9.setDoubleBuffered(true);
+        label9.setForeground(new Color(-16777216));
         label9.setHorizontalAlignment(0);
         label9.setHorizontalTextPosition(0);
         label9.setText("2");
         DateLine.add(label9, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_NORTH, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension(34, 34), null, 0, false));
         final JLabel label10 = new JLabel();
         label10.setAlignmentX(0.5f);
+        label10.setBackground(new Color(-1));
         label10.setDoubleBuffered(true);
+        label10.setForeground(new Color(-16777216));
         label10.setHorizontalAlignment(0);
         label10.setHorizontalTextPosition(0);
         label10.setText("3");
         DateLine.add(label10, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_NORTH, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension(34, 34), null, 0, false));
         final JLabel label11 = new JLabel();
         label11.setAlignmentX(0.5f);
+        label11.setBackground(new Color(-1));
         label11.setDoubleBuffered(true);
+        label11.setForeground(new Color(-16777216));
         label11.setHorizontalAlignment(0);
         label11.setHorizontalTextPosition(0);
         label11.setText("4");
         DateLine.add(label11, new GridConstraints(0, 3, 1, 1, GridConstraints.ANCHOR_NORTH, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension(34, 34), null, 0, false));
         final JLabel label12 = new JLabel();
         label12.setAlignmentX(0.5f);
+        label12.setBackground(new Color(-1));
         label12.setDoubleBuffered(true);
+        label12.setForeground(new Color(-16777216));
         label12.setHorizontalAlignment(0);
         label12.setHorizontalTextPosition(0);
         label12.setText("5");
         DateLine.add(label12, new GridConstraints(0, 4, 1, 1, GridConstraints.ANCHOR_NORTH, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension(34, 34), null, 0, false));
         final JLabel label13 = new JLabel();
         label13.setAlignmentX(0.5f);
+        label13.setBackground(new Color(-1));
         label13.setDoubleBuffered(true);
+        label13.setForeground(new Color(-16777216));
         label13.setHorizontalAlignment(0);
         label13.setHorizontalTextPosition(0);
         label13.setText("6");
         DateLine.add(label13, new GridConstraints(0, 5, 1, 1, GridConstraints.ANCHOR_NORTH, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension(34, 34), null, 0, false));
         final JLabel label14 = new JLabel();
         label14.setAlignmentX(0.5f);
+        label14.setBackground(new Color(-1));
         label14.setDoubleBuffered(true);
+        label14.setForeground(new Color(-16777216));
         label14.setHorizontalAlignment(0);
         label14.setHorizontalTextPosition(0);
         label14.setText("7");
