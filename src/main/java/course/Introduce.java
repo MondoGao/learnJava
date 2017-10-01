@@ -23,6 +23,9 @@ public class Introduce {
         // course.homework4.MedalTally.run();
 
         // Homework5
-        course.homework5.Task.run();
+        // course.homework5.Task.run();
+
+        // Homework6
+        course.homework6.Gui.run();
     }
 }
