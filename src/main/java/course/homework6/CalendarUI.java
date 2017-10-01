@@ -97,16 +97,29 @@ public class CalendarUI extends JFrame {
                 if (pindex == 0) {
                     if (lbIndex + 1 < firstDayOfWeek.getValue()) {
                         lb.setForeground(new Color(255, 255, 255, 0));
+                        lb.setOpaque(false);
                     } else {
                         lb.setText(String.valueOf(dd++));
-                        lb.setForeground(new Color(0, 0, 0));
+                        lb.setForeground(Color.BLACK);
+                        if (dd - 1 == day) {
+                            lb.setForeground(Color.WHITE);
+                            lb.setOpaque(true);
+                            lb.setBackground(new Color(0, 151, 167));
+                        }
                     }
                 } else if (dd <= month.length(false)) {
                     lb.setText(String.valueOf(dd++));
-                    lb.setForeground(new Color(0, 0, 0));
+                    lb.setForeground(Color.BLACK);
+                    if (dd == day) {
+                        lb.setForeground(Color.WHITE);
+                        lb.setOpaque(true);
+                        lb.setBackground(new Color(0, 151, 167));
+                    }
                 } else {
                     lb.setForeground(new Color(255, 255, 255, 0));
+                    lb.setOpaque(false);
                 }
+
 
                 lbIndex++;
             }
@@ -268,10 +281,14 @@ public class CalendarUI extends JFrame {
         DateLine.setPreferredSize(new Dimension(294, 36));
         jpDate.add(DateLine);
         final JLabel label10 = new JLabel();
+        label10.setBackground(new Color(-16728876));
         label10.setDoubleBuffered(true);
+        label10.setFocusable(false);
         label10.setHorizontalAlignment(0);
         label10.setHorizontalTextPosition(0);
+        label10.setOpaque(false);
         label10.setText("1");
+        label10.setVisible(true);
         DateLine.add(label10, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_NORTH, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension(34, 34), null, 0, false));
         final JLabel label11 = new JLabel();
         label11.setDoubleBuffered(true);

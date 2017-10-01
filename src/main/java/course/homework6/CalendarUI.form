@@ -209,10 +209,14 @@
                       </grid>
                     </constraints>
                     <properties>
+                      <background color="-16728876"/>
                       <doubleBuffered value="true"/>
+                      <focusable value="false"/>
                       <horizontalAlignment value="0"/>
                       <horizontalTextPosition value="0"/>
+                      <opaque value="false"/>
                       <text value="1"/>
+                      <visible value="true"/>
                     </properties>
                   </component>
                   <component id="c7758" class="javax.swing.JLabel">
