@@ -23,6 +23,7 @@ dependencies {
     // This dependency is found on compile classpath of this component and consumers.
     compile 'com.google.guava:guava:22.0'
 
+    compile 'com.intellij:forms_rt:6.0.5'
     // Use JUnit test framework
     testCompile 'junit:junit:4.12'
 }
