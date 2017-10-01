@@ -16,7 +16,7 @@ public class CalendarUI extends JFrame {
     private JPanel SelectedDate;
     private JPanel MonthPick;
     private JPanel jpWeekday;
-    private JPanel Date;
+    private JPanel jpDate;
     private JPanel CalendarWrapper;
     private JPanel DateLine;
     private JButton btnExit;
@@ -69,7 +69,7 @@ public class CalendarUI extends JFrame {
         Component[] weekdays = jpWeekday.getComponents();
 
         for (Component wd : weekdays) {
-            wd.setForeground(new Color(0, 0, 0, 200));
+            wd.setForeground(new Color(0, 0, 0, 100));
         }
     }
 
@@ -81,6 +81,39 @@ public class CalendarUI extends JFrame {
         lbYear.setText(String.valueOf(year));
         lbDayMonthDay.setText(capitalize(dayOfWeek.name().substring(0, 3)) + ", " + capitalize(month.name().substring(0, 3)) + " " + day);
         lbMonthYear.setText(capitalize(month.name()) + " " + year);
+
+        LocalDate firstOfMonth = LocalDate.of(year, month, 1);
+        DayOfWeek firstDayOfWeek = firstOfMonth.getDayOfWeek();
+
+        int pindex = 0;
+        int dd = 1;
+        for (Component p : jpDate.getComponents()) {
+            JPanel pa = (JPanel) p;
+
+            int lbIndex = 0;
+            for (Component l : pa.getComponents()) {
+                JLabel lb = (JLabel) l;
+
+                if (pindex == 0) {
+                    if (lbIndex + 1 < firstDayOfWeek.getValue()) {
+                        lb.setForeground(new Color(255, 255, 255, 0));
+                    } else {
+                        lb.setText(String.valueOf(dd++));
+                        lb.setForeground(new Color(0, 0, 0));
+                    }
+                } else if (dd <= month.length(false)) {
+                    lb.setText(String.valueOf(dd++));
+                    lb.setForeground(new Color(0, 0, 0));
+                } else {
+                    lb.setForeground(new Color(255, 255, 255, 0));
+                }
+
+                lbIndex++;
+            }
+
+            pindex++;
+        }
+
     }
 
     private String capitalize(String str) {
@@ -175,7 +208,7 @@ public class CalendarUI extends JFrame {
         lbMonthYear.setHorizontalAlignment(0);
         lbMonthYear.setHorizontalTextPosition(0);
         lbMonthYear.setText("month year");
-        MonthPick.add(lbMonthYear, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        MonthPick.add(lbMonthYear, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         final JLabel label1 = new JLabel();
         Font label1Font = this.$$$getFont$$$(null, Font.BOLD, -1, label1.getFont());
         if (label1Font != null) label1.setFont(label1Font);
@@ -223,17 +256,17 @@ public class CalendarUI extends JFrame {
         label9.setOpaque(false);
         label9.setText("S");
         jpWeekday.add(label9, new GridConstraints(0, 6, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        Date = new JPanel();
-        Date.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
-        Date.setBackground(new Color(-1));
-        Date.setForeground(new Color(-1));
-        Date.setPreferredSize(new Dimension(294, 214));
-        CalendarWrapper.add(Date);
+        jpDate = new JPanel();
+        jpDate.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        jpDate.setBackground(new Color(-1));
+        jpDate.setForeground(new Color(-1));
+        jpDate.setPreferredSize(new Dimension(294, 214));
+        CalendarWrapper.add(jpDate);
         DateLine = new JPanel();
-        DateLine.setLayout(new GridLayoutManager(1, 7, new Insets(0, 0, 0, 0), -1, -1));
+        DateLine.setLayout(new GridLayoutManager(1, 7, new Insets(0, 0, 0, 0), -1, -1, true, true));
         DateLine.setBackground(new Color(-1));
         DateLine.setPreferredSize(new Dimension(294, 36));
-        Date.add(DateLine);
+        jpDate.add(DateLine);
         final JLabel label10 = new JLabel();
         label10.setDoubleBuffered(true);
         label10.setHorizontalAlignment(0);
@@ -282,10 +315,10 @@ public class CalendarUI extends JFrame {
         label16.setText("7");
         DateLine.add(label16, new GridConstraints(0, 6, 1, 1, GridConstraints.ANCHOR_NORTH, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension(34, 34), null, 0, false));
         final JPanel panel1 = new JPanel();
-        panel1.setLayout(new GridLayoutManager(1, 7, new Insets(0, 0, 0, 0), -1, -1));
+        panel1.setLayout(new GridLayoutManager(1, 7, new Insets(0, 0, 0, 0), -1, -1, true, true));
         panel1.setBackground(new Color(-1));
         panel1.setPreferredSize(new Dimension(294, 36));
-        Date.add(panel1);
+        jpDate.add(panel1);
         final JLabel label17 = new JLabel();
         label17.setDoubleBuffered(true);
         label17.setHorizontalAlignment(0);
@@ -335,10 +368,10 @@ public class CalendarUI extends JFrame {
         label23.setText("7");
         panel1.add(label23, new GridConstraints(0, 6, 1, 1, GridConstraints.ANCHOR_NORTH, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension(34, 34), null, 0, false));
         final JPanel panel2 = new JPanel();
-        panel2.setLayout(new GridLayoutManager(1, 7, new Insets(0, 0, 0, 0), -1, -1));
+        panel2.setLayout(new GridLayoutManager(1, 7, new Insets(0, 0, 0, 0), -1, -1, true, true));
         panel2.setBackground(new Color(-1));
         panel2.setPreferredSize(new Dimension(294, 36));
-        Date.add(panel2);
+        jpDate.add(panel2);
         final JLabel label24 = new JLabel();
         label24.setDoubleBuffered(true);
         label24.setHorizontalAlignment(0);
@@ -387,10 +420,10 @@ public class CalendarUI extends JFrame {
         label30.setText("7");
         panel2.add(label30, new GridConstraints(0, 6, 1, 1, GridConstraints.ANCHOR_NORTH, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension(34, 34), null, 0, false));
         final JPanel panel3 = new JPanel();
-        panel3.setLayout(new GridLayoutManager(1, 7, new Insets(0, 0, 0, 0), -1, -1));
+        panel3.setLayout(new GridLayoutManager(1, 7, new Insets(0, 0, 0, 0), -1, -1, true, true));
         panel3.setBackground(new Color(-1));
         panel3.setPreferredSize(new Dimension(294, 36));
-        Date.add(panel3);
+        jpDate.add(panel3);
         final JLabel label31 = new JLabel();
         label31.setDoubleBuffered(true);
         label31.setHorizontalAlignment(0);
@@ -439,10 +472,10 @@ public class CalendarUI extends JFrame {
         label37.setText("7");
         panel3.add(label37, new GridConstraints(0, 6, 1, 1, GridConstraints.ANCHOR_NORTH, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension(34, 34), null, 0, false));
         final JPanel panel4 = new JPanel();
-        panel4.setLayout(new GridLayoutManager(1, 7, new Insets(0, 0, 0, 0), -1, -1));
+        panel4.setLayout(new GridLayoutManager(1, 7, new Insets(0, 0, 0, 0), -1, -1, true, true));
         panel4.setBackground(new Color(-1));
         panel4.setPreferredSize(new Dimension(294, 36));
-        Date.add(panel4);
+        jpDate.add(panel4);
         final JLabel label38 = new JLabel();
         label38.setDoubleBuffered(true);
         label38.setHorizontalAlignment(0);
@@ -491,10 +524,10 @@ public class CalendarUI extends JFrame {
         label44.setText("7");
         panel4.add(label44, new GridConstraints(0, 6, 1, 1, GridConstraints.ANCHOR_NORTH, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension(34, 34), null, 0, false));
         final JPanel panel5 = new JPanel();
-        panel5.setLayout(new GridLayoutManager(1, 7, new Insets(0, 0, 0, 0), -1, -1));
+        panel5.setLayout(new GridLayoutManager(1, 7, new Insets(0, 0, 0, 0), -1, -1, true, true));
         panel5.setBackground(new Color(-1));
         panel5.setPreferredSize(new Dimension(294, 36));
-        Date.add(panel5);
+        jpDate.add(panel5);
         final JLabel label45 = new JLabel();
         label45.setDoubleBuffered(true);
         label45.setHorizontalAlignment(0);
