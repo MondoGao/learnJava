@@ -26,6 +26,11 @@ public class Introduce {
         // course.homework5.Task.run();
 
         // Homework6
-        course.homework6.Gui.run();
+        // course.homework6.Gui.run();
+
+        // Homework7
+
+        // Homework8
+        course.homework8.CopyDirectory.run();
     }
 }
