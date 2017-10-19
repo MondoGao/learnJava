@@ -1,12 +1,16 @@
 package course.homework9;
 
 import java.io.*;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ChatServer {
+    private static final String defaultRoom = "default";
+
     private int port;
+    private ServerSocket serverSocket;
     private HashMap<String, ArrayList<ChatConnection>> rooms = new HashMap<>();
 
     public ChatServer(int port) {
@@ -14,8 +18,29 @@ public class ChatServer {
         this.initRoom();
     }
 
+    public void start() throws IOException {
+        try {
+            serverSocket = new ServerSocket(port);
+
+            queryConnection();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 等待链接并创建线程
+     * @throws IOException
+     */
+    public void queryConnection() throws IOException {
+        while (true) {
+            Socket s = serverSocket.accept();
+            (new ChatConnection(s)).start();
+        }
+    }
+
     private void initRoom() {
-        rooms.put("default", new ArrayList<>());
+        rooms.put(defaultRoom, new ArrayList<>());
     }
 
     class ChatConnection extends Thread {
@@ -33,6 +58,7 @@ public class ChatServer {
             this.socket = socket;
             this.in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             this.out = new PrintWriter(socket.getOutputStream());
+            switchRoom(defaultRoom);
         }
 
         /**
@@ -54,6 +80,7 @@ public class ChatServer {
         public void read() throws IOException {
             String str;
             while ((str = in.readLine()) != null) {
+                // 以 : 开头的视为命令
                 if (str.substring(0, 1) == ":") {
                     if (str == ":q") {
                         exit();
@@ -62,7 +89,7 @@ public class ChatServer {
 
                         switchRoom(roomName);
                     } else {
-                        out.println("错误的命令");
+                        broadcast(str);
                     }
                 } else {
                     broadcast(str);
@@ -74,6 +101,10 @@ public class ChatServer {
             out.println(msg);
         }
 
+        /**
+         * 向同房间广播消息
+         * @param msg
+         */
         public void broadcast(String msg) {
             for (ChatConnection c : rooms.get(room)) {
                 c.send(msg);
