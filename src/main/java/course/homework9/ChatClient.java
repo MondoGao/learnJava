@@ -47,17 +47,37 @@ public class ChatClient {
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
+                        stop();
                     }
                 }
             }).start();
+
+            System.out.println("链接成功，房间名：" + room);
 
             Scanner scan = new Scanner(System.in);
             while (!stopFlag) {
                 out.println(scan.nextLine());
                 out.flush();
+
+                System.out.println("发送成功");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            stop();
+        }
+    }
+
+    public void stop() {
+        System.out.println("断开链接");
+        try {
+            if (!s.isClosed()) {
+                s.close();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        stopFlag = true;
     }
 }

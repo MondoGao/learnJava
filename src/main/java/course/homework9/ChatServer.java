@@ -117,10 +117,12 @@ public class ChatServer {
          * @param msg
          */
         public void broadcast(String msg) {
-            System.out.println(getSocketName(socket) + " 向 " + room + " 发送消息：" + msg);
+            System.out.println(getSocketName(socket) + " 向 " + room + " 房间发送消息：" + msg);
 
             for (ChatConnection c : rooms.get(room)) {
-                c.send(msg);
+                if (c != this) {
+                    c.send(msg);
+                }
             }
         }
 
