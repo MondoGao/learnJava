@@ -21,6 +21,7 @@ public class ChatServer {
     public void start() {
         try {
             serverSocket = new ServerSocket(port);
+            System.out.println("服务器成功启动");
 
             queryConnection();
         } catch (IOException e) {
@@ -36,7 +37,7 @@ public class ChatServer {
         while (true) {
             Socket s = serverSocket.accept();
 
-            System.out.println(s.getInetAddress() + " 已连接到服务器");
+            System.out.println(getSocketName(s) + " 已连接到服务器");
 
             (new ChatConnection(s)).start();
         }
@@ -44,6 +45,10 @@ public class ChatServer {
 
     private void initRoom() {
         rooms.put(defaultRoom, new ArrayList<>());
+    }
+
+    private String getSocketName(Socket s) {
+        return s.getInetAddress() + String.valueOf(s.getPort());
     }
 
     class ChatConnection extends Thread {
@@ -79,17 +84,17 @@ public class ChatServer {
 
             room = nextRoom;
 
-            System.out.println(socket.getInetAddress() + " 切换至房间：" + room);
+            System.out.println(getSocketName(socket) + " 切换至房间：" + room);
         }
 
         public void read() throws IOException {
             String str;
             while ((str = in.readLine()) != null) {
                 // 以 : 开头的视为命令
-                if (str.substring(0, 1) == ":") {
-                    if (str == ":q") {
+                if (str.substring(0, 1).equals(":")) {
+                    if (str.equals(":q")) {
                         exit();
-                    } else if (str.substring(0, 4) == ":room") {
+                    } else if (str.substring(0, 5).equals(":room")) {
                         String roomName = str.substring(6);
 
                         switchRoom(roomName);
@@ -104,6 +109,7 @@ public class ChatServer {
 
         public void send(String msg) {
             out.println(msg);
+            out.flush();
         }
 
         /**
@@ -111,6 +117,8 @@ public class ChatServer {
          * @param msg
          */
         public void broadcast(String msg) {
+            System.out.println(getSocketName(socket) + " 向 " + room + " 发送消息：" + msg);
+
             for (ChatConnection c : rooms.get(room)) {
                 c.send(msg);
             }

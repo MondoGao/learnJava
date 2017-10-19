@@ -29,6 +29,7 @@ public class ChatRoom {
         System.out.print("请输入服务器端口号：");
 
         int port = scan.nextInt();
+        scan.nextLine();
 
         System.out.print("请输入房间名：");
 

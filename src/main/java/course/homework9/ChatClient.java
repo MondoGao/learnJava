@@ -35,6 +35,7 @@ public class ChatClient {
 
             if (!room.isEmpty()) {
                 out.println(":room " + room);
+                out.flush();
             }
 
             new Thread(() -> {
@@ -53,6 +54,7 @@ public class ChatClient {
             Scanner scan = new Scanner(System.in);
             while (!stopFlag) {
                 out.println(scan.nextLine());
+                out.flush();
             }
         } catch (IOException e) {
             e.printStackTrace();
