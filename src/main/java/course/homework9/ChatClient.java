@@ -26,32 +26,36 @@ public class ChatClient {
         this.port = port;
     }
 
-    public void start() throws IOException {
-        s = new Socket(ip, port);
+    public void start() {
+        try {
+            s = new Socket(ip, port);
 
-        out = new PrintWriter(s.getOutputStream());
-        in = new BufferedReader(new InputStreamReader(s.getInputStream()));
+            out = new PrintWriter(s.getOutputStream());
+            in = new BufferedReader(new InputStreamReader(s.getInputStream()));
 
-        if (!room.isEmpty()) {
-            out.println(":room " + room);
-        }
-
-        new Thread(() -> {
-            String str;
-            while (!stopFlag) {
-                try {
-                    while (!(str = in.readLine()).isEmpty()) {
-                        System.out.println(str);
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+            if (!room.isEmpty()) {
+                out.println(":room " + room);
             }
-        }).start();
 
-        Scanner scan = new Scanner(System.in);
-        while (!stopFlag) {
-            out.println(scan.nextLine());
+            new Thread(() -> {
+                String str;
+                while (!stopFlag) {
+                    try {
+                        while (!(str = in.readLine()).isEmpty()) {
+                            System.out.println(str);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+
+            Scanner scan = new Scanner(System.in);
+            while (!stopFlag) {
+                out.println(scan.nextLine());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

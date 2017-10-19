@@ -18,7 +18,7 @@ public class ChatServer {
         this.initRoom();
     }
 
-    public void start() throws IOException {
+    public void start() {
         try {
             serverSocket = new ServerSocket(port);
 
@@ -35,6 +35,9 @@ public class ChatServer {
     public void queryConnection() throws IOException {
         while (true) {
             Socket s = serverSocket.accept();
+
+            System.out.println(s.getInetAddress() + " 已连接到服务器");
+
             (new ChatConnection(s)).start();
         }
     }
@@ -75,6 +78,8 @@ public class ChatServer {
             rooms.get(nextRoom).add(this);
 
             room = nextRoom;
+
+            System.out.println(socket.getInetAddress() + " 切换至房间：" + room);
         }
 
         public void read() throws IOException {

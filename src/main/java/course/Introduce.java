@@ -31,6 +31,9 @@ public class Introduce {
         // Homework7
 
         // Homework8
-        course.homework8.CopyDirectory.run();
+        // course.homework8.CopyDirectory.run();
+
+        // Homework9
+        course.homework9.ChatRoom.run();
     }
 }
